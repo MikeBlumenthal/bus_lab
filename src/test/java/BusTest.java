@@ -6,10 +6,17 @@ import static org.junit.Assert.assertEquals;
 public class BusTest {
     Bus bus;
     Person person;
+    Person person2;
+    Person person3;
+    BusStop busStop;
 
     @Before
     public void beforeEach(){
         bus = new Bus("Balerno", 5);
+        person = new Person("Balerno");
+        person2 = new Person("Bonnyrigg");
+        person3 = new Person("Balerno");
+        busStop = new BusStop("String Street");
     }
 
     @Test
@@ -40,5 +47,16 @@ public class BusTest {
         assertEquals(1, bus.passengerCount() );
         bus.popPassenger();
         assertEquals(0, bus.passengerCount() );
+    }
+
+    @Test
+    public void pickUpPerson(){
+        busStop.addPerson(person);
+        busStop.addPerson(person2);
+        busStop.addPerson(person3);
+        assertEquals(3, busStop.queueLength());
+        bus.pickUp(busStop);
+        assertEquals(1, busStop.queueLength());
+        assertEquals(2, bus.passengerCount());
     }
 }

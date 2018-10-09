@@ -22,4 +22,14 @@ public class Bus {
     public void popPassenger() {
         passengers.remove(passengerCount()-1);
     }
+
+    public void pickUp(BusStop busStop) {
+        for (int i = busStop.queueLength()-1; i>=0; i--){
+            if(this.destination.equals(busStop.getDestinationByIndex(i))){
+                addPassenger((busStop.getQueue().remove(i)));
+            }
+        }
+
+    }
+
 }
